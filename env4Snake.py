@@ -13,7 +13,7 @@ from torchvision import transforms
 
 class Snake:
     def __init__(self):
-        self.snake_speed = 100 # 贪吃蛇的速度
+        self.snake_speed = 1000 # 贪吃蛇的速度
         self.windows_width = 600
         self.windows_height = 600  # 游戏窗口的大小
         self.cell_size = 50  # 贪吃蛇身体方块大小,注意身体大小必须能被窗口长宽整除
@@ -221,7 +221,8 @@ if __name__ == "__main__":
     env.snake_speed = 10
     agent = AgentDiscretePPO()
     agent.init(512,6,4)
-    agent.act.load_state_dict(torch.load('act_weight.pkl'))
+    # agent.act.load_state_dict(torch.load('aw.pkl'))
+    agent.act.load_state_dict(torch.load('act_weight.pkl', map_location=torch.device('cpu')))
     for _ in range(15):
         o = env.reset()
         # for _ in range(500):
